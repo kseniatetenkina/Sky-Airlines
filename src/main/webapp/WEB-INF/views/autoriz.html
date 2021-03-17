@@ -1,20 +1,19 @@
-
 <!DOCTYPE html>
 <html>
 <head>
     <meta charset="UTF-8">
     <title>Form</title>
-    <link rel="stylesheet" href="style.css" >
+    <!--    <link rel="stylesheet" href="style.css" >-->
 </head>
 <body>
-<form action="/login/process", method="post">
+<form action="/login/process" , method="post"/>
 <div class="form">
     <h1>Вход</h1>
-    <div class="input-form">
-        <input type="email" placeholder="Введите email">
+    <div>
+        Email: <input name="email" type="email">
     </div>
-    <div class="input-form">
-        <input type="password" placeholder="Введите пароль">
+    <div>
+        Password: <input name="password" type="password">
     </div>
     <div class="input-form">
         <input type="submit" value="Войти">

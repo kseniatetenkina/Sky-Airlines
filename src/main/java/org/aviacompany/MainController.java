@@ -15,7 +15,7 @@ public class MainController {
     private UsersDaoImpl userDaoImpl;
     @RequestMapping(value = "/home", method = RequestMethod.GET)
     public ModelAndView home() {
-        return new ModelAndView("index");
+        return new ModelAndView("autoriz");
     }
 
     @GetMapping( "/users")
@@ -24,9 +24,6 @@ public class MainController {
         return userDaoImpl.getAll();
     }
 
-    @RequestMapping(value = "/main", method = RequestMethod.GET)
-    public ModelAndView main() {
-        return new ModelAndView("main");
-    }
+
 
 }

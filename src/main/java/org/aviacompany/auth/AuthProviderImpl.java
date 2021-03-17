@@ -20,13 +20,17 @@ public class AuthProviderImpl implements AuthenticationProvider {
     private UsersDaoImpl usersDao;
     @Override
     public Authentication authenticate(Authentication authentication) throws AuthenticationException{
+        System.out.println("Мы в методе авторизации");
         String email = authentication.getName();
-        Users user = usersDao.getUserByLogin( email);
+        Users user = usersDao.getUserByMail( email);
+        System.out.println("логин пользователя = " + user.getLogin());
         if(user == null){
+
             throw new UsernameNotFoundException("User not found");
         }
         String password = authentication.getCredentials().toString();
-        if(password.equals(user.getPassword())){
+        System.out.println("Password = " + password);
+        if(!password.equals(user.getPassword())){
             throw new BadCredentialsException("Bad credentials");
         }
         List<GrantedAuthority> authorities = new ArrayList<>();

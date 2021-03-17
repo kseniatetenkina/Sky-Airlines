@@ -19,16 +19,16 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
     @Override
     protected void configure(HttpSecurity http) throws Exception{
 
-        System.out.println("configer");
+
         http.authorizeRequests()
-                .antMatchers( "/login").anonymous()
-                .antMatchers("/main").authenticated()
-                .and().csrf().disable()
+                .antMatchers( "/login").anonymous()  // это url, который доступен неавторизованным пользователям
+                .antMatchers("/main").authenticated()  // доступна только авторизованным пользователям
+                .and().csrf().disable()  // доп шифрование, поэтому выкл
                 .formLogin()
-                .loginPage("/login")
-                .loginProcessingUrl("/login/process")
-                .usernameParameter("email")
-                .and().logout();
+                .loginPage("/login")  // отвечает за форму регистрации
+                .loginProcessingUrl("/login/process")  // url на который посылается данные пользовтеля
+                .usernameParameter("email")  // указываем, что будет емайл
+                .and().logout();  //пользователь может выйти
     }
 
     @Override
