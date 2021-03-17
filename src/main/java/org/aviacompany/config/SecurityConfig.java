@@ -27,9 +27,12 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
                 .formLogin()
                 .loginPage("/login")  // отвечает за форму регистрации
                 .loginProcessingUrl("/login/process")  // url на который посылается данные пользовтеля
-                .usernameParameter("email")  // указываем, что будет емайл
+                .usernameParameter("email") // указываем, что будет емайл
+                .failureUrl("/login")
+                .defaultSuccessUrl("/main", true)
                 .and().logout();  //пользователь может выйти
     }
+
 
     @Override
     protected void configure(AuthenticationManagerBuilder auth) throws Exception{
