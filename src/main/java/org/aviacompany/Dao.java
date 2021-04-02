@@ -6,7 +6,7 @@ import java.util.List;
 
 @Component
 public interface Dao {
-    List<Users> getAll();
-    Users getUser(String login);
-    void add(Users user);
+    List<User> getAll();
+    User getUser(String login);
+    void add(User user);
 }

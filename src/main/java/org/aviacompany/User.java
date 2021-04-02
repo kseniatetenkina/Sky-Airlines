@@ -7,7 +7,7 @@ import javax.validation.constraints.NotNull;
 @Entity
 @Table(name = "users")
 
-public class Users {
+public class User {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
 
@@ -29,12 +29,12 @@ public class Users {
         return email;
     }
 
-    public Users()
+    public User()
     {
 
     }
 
-    public Users( String login, String password, String role)
+    public User(String login, String password, String role)
     {
 
         this.login = login;

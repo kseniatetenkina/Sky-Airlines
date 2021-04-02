@@ -1,6 +1,6 @@
 package org.aviacompany.controllers;
 
-import org.aviacompany.Users;
+import org.aviacompany.User;
 import org.aviacompany.UsersDaoImpl;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -24,7 +24,7 @@ public class AuthController {
     }
 
     @GetMapping("/userTest")
-    public Users getUser() {
+    public User getUser() {
         return userDaoImpl.getUserByMail("login@gmail.com");
     }
 }

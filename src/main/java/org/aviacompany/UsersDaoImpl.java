@@ -17,23 +17,23 @@ public class UsersDaoImpl implements Dao {
     }
 
     @Override
-    public List<Users> getAll() {
-        List<Users> users = getSession().createQuery("From Users ", Users.class).list();
+    public List<User> getAll() {
+        List<User> users = getSession().createQuery("From User ", User.class).list();
         System.out.println(users.size());
-        for (Users user : users) {
+        for (User user : users) {
             System.out.println(user.getLogin() + " " + user.getPassword());
         }
         return users;
     }
 
     @Override
-    public Users getUser(String login) {
+    public User getUser(String login) {
         return null;
     }
 
-    public Users getUserByMail(String email) {
+    public User getUserByMail(String email) {
         try {
-            Users user = getSession().createQuery("From Users where email like " + "'" + email + "'", Users.class)
+            User user = getSession().createQuery("From User where email like " + "'" + email + "'", User.class)
                     .list().get(0);
             if (user != null) {
                 return user;
@@ -45,9 +45,22 @@ public class UsersDaoImpl implements Dao {
     }
 
     @Override
-    public void add(Users user) {
+    public void add(User user) {
+        getSession().save( user);
 
     }
 
+    public User getUserById(int id) {
+        User user = null;
+        try {
+            List<User> users = getSession().createQuery("From User where id = " + id, User.class).list();
+            if (users != null && users.size() != 0) {
+                user = users.get(0);
+            }
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+        return user;
+    }
 
 }

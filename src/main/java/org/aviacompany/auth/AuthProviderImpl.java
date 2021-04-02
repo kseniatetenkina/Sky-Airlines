@@ -1,6 +1,6 @@
 package org.aviacompany.auth;
 
-import org.aviacompany.Users;
+import org.aviacompany.User;
 import org.aviacompany.UsersDaoImpl;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.authentication.AuthenticationProvider;
@@ -22,7 +22,7 @@ public class AuthProviderImpl implements AuthenticationProvider {
     public Authentication authenticate(Authentication authentication) throws AuthenticationException{
         System.out.println("Мы в методе авторизации");
         String email = authentication.getName();
-        Users user = usersDao.getUserByMail( email);
+        User user = usersDao.getUserByMail( email);
         System.out.println("логин пользователя = " + user.getLogin());
         if(user == null){
 

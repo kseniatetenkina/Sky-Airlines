@@ -2,7 +2,10 @@ package org.aviacompany;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
+import org.springframework.ui.ModelMap;
+import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.servlet.ModelAndView;
@@ -19,9 +22,27 @@ public class MainController {
     }
 
     @GetMapping( "/users")
-    public List<Users> getUsers()
+    public List<User> getUsers()
     {
         return userDaoImpl.getAll();
+    }
+
+    @RequestMapping(value = "/addUser", method = RequestMethod.GET)
+    public String createUser(User user){
+        return "registration";
+    }
+
+    @RequestMapping(value = "/addUser", method = RequestMethod.POST)
+    public String createUser(@ModelAttribute("user") User user, BindingResult result, ModelMap model){
+        if(result.hasErrors()) {
+            return "Error";
+        }
+        model.addAttribute("login", user.getLogin());
+        model.addAttribute("password", user.getPassword());
+        model.addAttribute("email", user.getEmail());
+        userDaoImpl.add(user);
+        return "redirect:users-rest/users";
+
     }
 
 
