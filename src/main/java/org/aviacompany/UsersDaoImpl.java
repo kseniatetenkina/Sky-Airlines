@@ -3,12 +3,15 @@ package org.aviacompany;
 import org.hibernate.Session;
 import org.hibernate.SessionFactory;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Component;
 
 import java.util.List;
 
 @Component
 public class UsersDaoImpl implements Dao {
+    @Autowired
+    private PasswordEncoder passwordEncoder;
     @Autowired
     private SessionFactory sessionFactory;
 
@@ -20,9 +23,9 @@ public class UsersDaoImpl implements Dao {
     public List<User> getAll() {
         List<User> users = getSession().createQuery("From User ", User.class).list();
         System.out.println(users.size());
-        for (User user : users) {
+        /*for (User user : users) {
             System.out.println(user.getLogin() + " " + user.getPassword());
-        }
+        }*/
         return users;
     }
 
@@ -46,6 +49,7 @@ public class UsersDaoImpl implements Dao {
 
     @Override
     public void add(User user) {
+        user.setPassword(passwordEncoder.encode(user.getPassword()));
         getSession().save( user);
 
     }

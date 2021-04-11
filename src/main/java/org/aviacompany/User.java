@@ -3,6 +3,7 @@ package org.aviacompany;
 import javax.persistence.*;
 import javax.validation.constraints.Email;
 import javax.validation.constraints.NotNull;
+import javax.validation.constraints.Size;
 
 @Entity
 @Table(name = "users")
@@ -12,9 +13,9 @@ public class User {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
 
     private long id;
+    //private String login;
     @NotNull
-    private String login;
-    @NotNull
+    @Size(min = 8, message = "Пароль меньше 8 символов")
     private String password;
     @NotNull
     private String role;
@@ -34,10 +35,10 @@ public class User {
 
     }
 
-    public User(String login, String password, String role)
+    public User( String password, String role)
     {
 
-        this.login = login;
+        //this.login = login;
         this.password = password;
         this.role = role;
     }
@@ -47,10 +48,10 @@ public class User {
         this.id = id;
     }
 
-    public void setLogin(String login)
+   /* public void setLogin(String login)
     {
         this.login = login;
-    }
+    }*/
 
     public void setPassword(String password)
     {
@@ -67,10 +68,10 @@ public class User {
         return id;
     }
 
-    public String getLogin()
+    /*public String getLogin()
     {
         return login;
-    }
+    }*/
 
     public String getPassword()
     {

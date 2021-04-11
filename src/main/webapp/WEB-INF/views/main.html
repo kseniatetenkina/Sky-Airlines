@@ -1,63 +1,80 @@
 <!DOCTYPE html>
-<html lang="ru-RU">
+<html>
 <head>
     <meta charset="UTF-8">
-    <span style="float: left;"> <title> Небо</title> </span>
-    <span style="float: right;">  Войти\Зарегистрироваться </span>
+    <title>Сайт авиакомпании</title>
+    <!-- <h1 align = "center" class = "title">SKY AIRLINES</h1> -->
+    <link rel="stylesheet" href="/resourses/css/style3.css" >
 </head>
+
 <body>
-<a href="/logout"> Выйти </a>
-<h1 style="text-align: left;"> Авиакомпания Небо </h1>
-<table width="50%">
+<form class = "navigation">
+    <div class = "raz">
+        <a class = "title">SKY AIRLINES</a>
+        <a class="c" href="#">ИНФОРМАЦИЯ</a>
+        <a class="c" href="#">КУПИТЬ БИЛЕТ</a>
+        <a class="c1" href="/logout">ВЫЙТИ</a>
+    </div>
+</form>
+<h2 align = "center" class = "text">Поиск билетов</h2>
+<form class = "trip">
+    <div class="form_radio_group-item">
+        <input id="round" type="radio" name="radio" value="1" checked>
+        <label for="round">Туда и обратно</label>
+    </div>
+    <div class="form_radio_group-item">
+        <input id="thereto" type="radio" name="radio" value="2">
+        <label for="thereto">Только туда</label>
+    </div>
+</form>
+
+<form align = "center">
+    <input class ="from" placeholder="Откуда" type="text" name="from">
+    <input class ="to" placeholder="Куда" type="text" name="to">
+    <input class ="date1" placeholder="Туда" type = "date" name="first date">
+    <input class ="date2" placeholder="Обратно" type = "date" name="second date">
+    <input class ="submit" type="submit" name="search" value="ПОИСК">
+</form>
+
+<p>
+    <img src="https://wallbox.ru/resize/1152x864/wallpapers/main/201309/samolet-ayeroport-aviaciya-eda76aa.jpg"height="400" width="590" alt="самолет1">
+    <img src="https://pravdaurfo.ru/sites/default/files/088.jpg"height="400" width="590" alt="самолет2">
+</p>
+
+<p><img src="https://lime-stone.ru/image/cache/data/gallery/granit/gabbrodiabaz-920x690.jpg "height="0.5" width="100%"></p>
+
+<h3 class = "text2">Подпишитесь на рассылку, чтобы не пропустить новую информацию о полетах и скидках</h3>
+<form>
+    <input class ="email" placeholder="Введите Ваш email" type="email" name="email">
+    <input class = "submit" type="submit" name="search" value="Подписаться">
+</form>
+<br><b></b></br>
+<table align="center">
     <tr>
-        <td> Покупка билетов</td>
-        <td> Бронирование </td>
-        <td> Информация </td>
-        <td> Контакты </td>
+        <th><a class="c">О КОМПАНИИ</a></th>
+        <th><a class="c">ДОПОЛНИТЕЛЬНЫЕ УСЛУГИ</a></th>
+        <th><a class="c">МЫ В СОЦСЕТЯХ</th>
+        <th><a class="c">ГОРЯЧАЯ ЛИНИЯ</a></th>
+    </tr>
+    <tr>
+        <th>Новости</th>
+        <th>Бронирование отелей</th>
+        <th>Instagram</th>
+        <th>+7(999)123-45-67</th>
+    </tr>
+    <tr>
+        <th>Партнеры</th>
+        <th>Аренда авто</th>
+        <th>VK</th>
+        <th></th>
+    </tr>
+    <tr>
+        <th>Политика конфиденциальности</th>
+        <th>Приоритетная посадка</th>
+        <th>Twitter</th>
+        <th></th>
+    </tr>
 </table>
-<img src="https://avatars.mds.yandex.net/get-zen_doc/151305/pub_5b87a5c5a459c800a931287b_5b87a888d6e1a500a9c2a5bf/scale_1200" width="100%" height="300px">
-<br> <br>
-<table style="text-align: center; border: 1px; width: 50%; margin: auto;">
-    <tr>
-        <td> Покупка</td>
-        <td> Регистрация</td>
-        <td> Мои бронирования </td>
-        <td> Статус рейса </td>
-</table>
-<br><br>
-<table style="text-align: left; border: 1px; width: 50%; margin: auto;">
-    <tr>
-        <td> <small> Откуда </small></td>
-        <td> <small> Куда </small></td>
-        <td>  <small> Дата</small></td>
-    </tr>
-    <tr border="1px">
-        <td><textarea></textarea></td>
-        <td><textarea></textarea></td>
-        <td><textarea></textarea></td>
-    </tr>
-</table>
-<br>
-<center><button style=" margin: auto"> Искать</button></center>
-<br><br><br><br><br><br><br><br><br><br><br><br><br><br>
-<table width="100%" cellspacing="1" cellpadding="1" border="0" >
-    <tr style="text-align: left;">
-        <th>Контакты</th>
-        <th>Клиентам</th>
-        <th>Партнерам</th>
-        <th>Мы в соц.сетях</th>
-    </tr>
-    <tr>
-        <td>89999999990-Бесплатно по РФ</td>
-        <td>О компании</td>
-        <td>Грузовые перевозки</td>
-        <td> Вконтакте</td>
-    </tr>
-    <tr>
-        <td>*999-Для Санкт-Петербурга и Москвы</td>
-        <td>Политика конфиденциальности</td>
-        <td>Акционерам и инвесторам</td>
-        <td>Instagram</td>
-    </tr>
-</table>
+<br></br>
+<p align = "right" class = "text3">© 2021, ООО «SKY AIRLINES»</p>
 </body>

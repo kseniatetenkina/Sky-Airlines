@@ -9,7 +9,7 @@ import java.util.Calendar;
 @Table(name = "flights")
 
 
-public class Flights {
+public class Flight {
 
     private int flightNumber;
     private Calendar departureDate;
@@ -19,10 +19,10 @@ public class Flights {
     private String departureAirport;
     private String arrivalAirport;
 
-    public Flights() {
+    public Flight() {
     }
 
-    public Flights(int flightNumber, Calendar departureDate, Calendar arrivalDate, String departureCity, String arrivalСity, String departureAirport, String arrivalAirport) {
+    public Flight(int flightNumber, Calendar departureDate, Calendar arrivalDate, String departureCity, String arrivalСity, String departureAirport, String arrivalAirport) {
         this.flightNumber = flightNumber;
         this.departureDate = departureDate;
         this.arrivalDate = arrivalDate;
