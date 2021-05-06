@@ -1,3 +1,12 @@
+<%--
+  Created by IntelliJ IDEA.
+  User: Ксения
+  Date: 17.04.2021
+  Time: 18:50
+  To change this template use File | Settings | File Templates.
+--%>
+<%@ taglib prefix= "form" uri = "http://www.springframework.org/tags/form" %>
+<%@ page contentType="text/html;charset=UTF-8" language="java" %>
 <!DOCTYPE html>
 <html>
 <head>
@@ -8,6 +17,13 @@
 </head>
 
 <body>
+<form:select path="cities" modelAttribute="cities">
+    <form:option value="Moscow" label="Moscow"></form:option>
+    <form:option value="Saint-P" label="Saint-P"></form:option>
+    <form:option value="Petrozavodsk" label="Petrozavidsk"></form:option>
+    <form:option value="Komsomolsk-na-Amure" label="Komsomolsk-na-Amure"></form:option>
+    <form:option value="Samara" label="Samara"></form:option>
+</form:select>
 <form class = "navigation">
     <div class = "raz">
         <a class = "title">SKY AIRLINES</a>
@@ -28,12 +44,15 @@
     </div>
 </form>
 
+<form action="/flightSearch" method="get" modelAttribute = "flight"/>
 <form align = "center">
-    <input class ="from" placeholder="Откуда" type="text" name="from">
-    <input class ="to" placeholder="Куда" type="text" name="to">
-    <input class ="date1" placeholder="Туда" type = "date" name="first date">
-    <input class ="date2" placeholder="Обратно" type = "date" name="second date">
+    <div class="form">
+    <input class ="departureCity" placeholder="Откуда" type="text" name="departureCity">
+    <input class ="arrivalCity" placeholder="Куда" type="text" name="arrivalCity">
+    <input class ="departureDate" placeholder="Туда" type = "date" name="departureDate">
+    <input class ="arrivalDate" placeholder="Обратно" type = "date" name="arrivalDate">
     <input class ="submit" type="submit" name="search" value="ПОИСК">
+    </div>
 </form>
 
 <p>
@@ -53,7 +72,7 @@
     <tr>
         <th><a class="c">О КОМПАНИИ</a></th>
         <th><a class="c">ДОПОЛНИТЕЛЬНЫЕ УСЛУГИ</a></th>
-        <th><a class="c">МЫ В СОЦСЕТЯХ</th>
+        <th><a class="c">МЫ В СОЦСЕТЯХ</a></th>
         <th><a class="c">ГОРЯЧАЯ ЛИНИЯ</a></th>
     </tr>
     <tr>

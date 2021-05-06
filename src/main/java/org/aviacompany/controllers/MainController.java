@@ -1,23 +1,37 @@
 package org.aviacompany.controllers;
 
-import org.aviacompany.User;
-import org.aviacompany.UsersDaoImpl;
+import org.aviacompany.*;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.propertyeditors.CustomDateEditor;
 import org.springframework.stereotype.Controller;
+import org.springframework.ui.Model;
 import org.springframework.ui.ModelMap;
 import org.springframework.validation.BindingResult;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.ModelAttribute;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.WebDataBinder;
+import org.springframework.web.bind.annotation.*;
 import org.springframework.web.servlet.ModelAndView;
 
+import java.text.SimpleDateFormat;
+import java.util.Date;
 import java.util.List;
+import java.util.Locale;
 
 @Controller
 public class MainController {
     @Autowired
     private UsersDaoImpl userDaoImpl;
+    @Autowired
+    private FlightDaoImpl flightDao;
+    @Autowired
+    private TicketDaoImpl ticketDao;
+    @Autowired
+    private CityDaoImpl cityDao;
+
+    @InitBinder
+    public final void initBinderFormValidator(final WebDataBinder webDataBinder, final Locale locale){
+        final SimpleDateFormat simpleDateFormat = new SimpleDateFormat("yyyy-MM-dd", locale);
+        webDataBinder.registerCustomEditor(Date.class, new CustomDateEditor(simpleDateFormat, true));
+    }
 
     @RequestMapping(value = "/home", method = RequestMethod.GET)
     public ModelAndView home() {
@@ -65,7 +79,44 @@ public class MainController {
         return "registration1";
     }
 
+    @RequestMapping(value = "/flightSearch", method = RequestMethod.GET)
+    public ModelAndView flightSearch(@ModelAttribute("flight") Flight flightData, Model model){
+        ModelAndView map = new ModelAndView("flightSchedule");
+        model.addAttribute("flight", flightData);
+        System.out.println(flightData);
+        List<Flight> flights = flightDao.searchFlightsByCitiesAndByDates(flightData);
+        for(Flight flight : flights){
+            System.out.println(java.sql.Date.valueOf(flight.getArrivalDate().toString()));
+            java.sql.Date sqlDate = new java.sql.Date(flight.getArrivalDate().getTime());
+            System.out.println(sqlDate);
+
+            System.out.println(flight.getArrivalDate());
+        }
+        User user1 = new User();
+        user1.setPassword("12345");
+        user1.setEmail("user1@mail.ru");
+        user1.setId(99);
+        map.addObject("flights", flights);
+        map.addObject("Пассажир", user1);
+        return map;
+    }
 
 
+
+
+    @GetMapping("/flights")
+    public List<Flight> getFlight() {
+        return flightDao.getAll();
+    }
+
+    @GetMapping("/tickets")
+    public List<Ticket> getTicket() {
+        return ticketDao.getAll();
+    }
+
+    @GetMapping("/cities")
+    public List<City> getCity() {
+        return cityDao.getAll();
+    }
 
 }

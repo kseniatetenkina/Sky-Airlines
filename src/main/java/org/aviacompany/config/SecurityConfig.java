@@ -25,7 +25,7 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
 
         http.authorizeRequests()
                 .antMatchers( "/login").anonymous()  // это url, который доступен неавторизованным пользователям
-                .antMatchers("/main").authenticated()  // доступна только авторизованным пользователям
+                .antMatchers("/window").authenticated()  // доступна только авторизованным пользователям
                 .and().csrf().disable()  // доп шифрование, поэтому выкл
                 .formLogin()
                 .loginPage("/login")  // отвечает за форму регистрации

@@ -4,9 +4,14 @@ import org.aviacompany.User;
 import org.aviacompany.UsersDaoImpl;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
+import org.springframework.ui.ModelMap;
+import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
+
+import java.util.ArrayList;
 
 @Controller
 public class AuthController {
@@ -19,7 +24,7 @@ public class AuthController {
         return "autoriz";
     }
     @RequestMapping(value = "/main", method = RequestMethod.GET)
-    public String main() {
+    public String main(@ModelAttribute("cities") ArrayList<String> cities, BindingResult result, ModelMap model) {
         return "main";
     }
 

@@ -22,14 +22,14 @@ public class WebConfig implements WebMvcConfigurer {
     }
     @Override
     public void addViewControllers(ViewControllerRegistry registry) {
-        registry.addViewController("/").setViewName("redirect:/login");
+        registry.addViewController("/").setViewName("redirect:/main");
     }
 
     @Bean
     public InternalResourceViewResolver viewResolver() {
         InternalResourceViewResolver viewResolver = new InternalResourceViewResolver();
         viewResolver.setPrefix("WEB-INF/views/");
-        viewResolver.setSuffix(".html");
+        viewResolver.setSuffix(".jsp");
         viewResolver.setContentType("text/html;charset=UTF-8");
         viewResolver.setCache(false);
         return viewResolver;

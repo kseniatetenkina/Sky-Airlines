@@ -1,35 +1,59 @@
 package org.aviacompany;
 
 
-import javax.persistence.Table;
+import javax.persistence.*;
+import java.time.LocalDate;
 import java.util.Calendar;
+import java.util.Date;
 
 
-
+@Entity
 @Table(name = "flights")
 
 
 public class Flight {
 
+    @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+
+    private long id;
+    @Column(name = "flight_number")
     private int flightNumber;
-    private Calendar departureDate;
-    private Calendar arrivalDate;
+    @Column(name = "departure_date")
+    private Date departureDate;
+    @Column(name = "arrival_date")
+    private Date arrivalDate;
+   @Column(name = "departure_city")
     private String departureCity;
-    private String arrivalСity;
+    @Column(name = "arrival_city")
+    private String arrivalCity;
+    @Column(name = "departure_airport")
     private String departureAirport;
+    @Column(name = "arrival_airport")
     private String arrivalAirport;
+
 
     public Flight() {
     }
 
-    public Flight(int flightNumber, Calendar departureDate, Calendar arrivalDate, String departureCity, String arrivalСity, String departureAirport, String arrivalAirport) {
+    public Flight( int flightNumber,  String departureCity, String arrivalCity, String departureAirport, String arrivalAirport, long id, Date departureDate, Date arrivalDate) {
         this.flightNumber = flightNumber;
         this.departureDate = departureDate;
         this.arrivalDate = arrivalDate;
         this.departureCity = departureCity;
-        this.arrivalСity = arrivalСity;
+        this.arrivalCity = arrivalCity;
         this.departureAirport = departureAirport;
         this.arrivalAirport = arrivalAirport;
+        this.id = id;
+    }
+
+
+    public long getId() {
+        return id;
+    }
+
+    public void setId(long id) {
+        this.id = id;
     }
 
     public int getFlightNumber() {
@@ -40,19 +64,19 @@ public class Flight {
         this.flightNumber = flightNumber;
     }
 
-    public Calendar getDepartureDate() {
+    public Date getDepartureDate() {
         return departureDate;
     }
 
-    public void setDepartureDate(Calendar departureDate) {
+    public void setDepartureDate(Date departureDate) {
         this.departureDate = departureDate;
     }
 
-    public Calendar getArrivalDate() {
+    public Date getArrivalDate() {
         return arrivalDate;
     }
 
-    public void setArrivalDate(Calendar arrivalDate) {
+    public void setArrivalDate(Date arrivalDate) {
         this.arrivalDate = arrivalDate;
     }
 
@@ -64,12 +88,12 @@ public class Flight {
         this.departureCity = departureCity;
     }
 
-    public String getArrivalСity() {
-        return arrivalСity;
+    public String getArrivalCity() {
+        return arrivalCity;
     }
 
-    public void setArrivalСity(String arrivalСity) {
-        this.arrivalСity = arrivalСity;
+    public void setArrivalCity(String arrivalCity) {
+        this.arrivalCity = arrivalCity;
     }
 
     public String getDepartureAirport() {
@@ -86,5 +110,19 @@ public class Flight {
 
     public void setArrivalAirport(String arrivalAirport) {
         this.arrivalAirport = arrivalAirport;
+    }
+
+    @Override
+    public String toString() {
+        return "Flight{" +
+                "id=" + id +
+                ", flightNumber=" + flightNumber +
+                ", departureDate=" + departureDate +
+                ", arrivalDate=" + arrivalDate +
+                ", departureCity='" + departureCity + '\'' +
+                ", arrivalCity='" + arrivalCity + '\'' +
+                ", departureAirport='" + departureAirport + '\'' +
+                ", arrivalAirport='" + arrivalAirport + '\'' +
+                '}';
     }
 }
