@@ -3,21 +3,16 @@ package org.aviacompany;
 
 import org.hibernate.Session;
 import org.hibernate.SessionFactory;
-import org.hibernate.Transaction;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
-import org.springframework.stereotype.Repository;
 
 import java.util.List;
 
-@Repository
+@Component
 public class TicketDaoImpl {
 
     @Autowired
     private SessionFactory sessionFactory;
-
-    @Autowired
-    private UsersDaoImpl userDaoImpl;
 
     private Session getSession(){
         return sessionFactory.openSession();
@@ -45,16 +40,8 @@ public class TicketDaoImpl {
         return ticket;
     }
 
-    public void add(Ticket ticket) {
-        Session session =  getSession();
-        Transaction tx = session.beginTransaction();
-        User user = userDaoImpl.getUserById(ticket.getUser_id());
-//        int newUserCash = user.getMoney()-ticket.getTicket_price();
-//        userDaoImpl.updateUsersCash(ticket.getUser_id(),newUserCash);
-        System.out.println("добавляем новый билет");
-        tx.commit();
-        session.close();
-        getSession().save(ticket);
+    public void add(Object ticket) {
+        getSession().save( ticket);
     }
 
     public Ticket getTicket(String login) {
@@ -73,16 +60,6 @@ public class TicketDaoImpl {
         }
         return null;
     }
-    public List<Ticket> getTicketsByUser(long userId) {
-        try {
-            List<Ticket> tickets = getSession().createQuery("From Ticket where user_id = " + userId, Ticket.class)
-                    .list();
-            if (tickets != null) {
-                return tickets;
-            }
-        } catch (Exception e) {
-            e.printStackTrace();
-        }
-        return null;
-    }
+
+
 }

@@ -17,7 +17,13 @@
 </head>
 
 <body>
-
+<form:select path="cities" modelAttribute="cities">
+    <form:option value="Moscow" label="Moscow"></form:option>
+    <form:option value="Saint-P" label="Saint-P"></form:option>
+    <form:option value="Petrozavodsk" label="Petrozavidsk"></form:option>
+    <form:option value="Komsomolsk-na-Amure" label="Komsomolsk-na-Amure"></form:option>
+    <form:option value="Samara" label="Samara"></form:option>
+</form:select>
 <form class = "navigation">
     <div class = "raz">
         <a class = "title">SKY AIRLINES</a>

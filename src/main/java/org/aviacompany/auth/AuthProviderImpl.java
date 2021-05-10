@@ -29,7 +29,7 @@ public class AuthProviderImpl implements AuthenticationProvider {
     public Authentication authenticate(Authentication authentication) throws AuthenticationException{
         System.out.println("Мы в методе авторизации");
         String email = authentication.getName();
-        User user = usersDao.getUserByEmail( email);
+        User user = usersDao.getUserByMail( email);
         if(user == null){
 
             throw new UsernameNotFoundException("User not found");
