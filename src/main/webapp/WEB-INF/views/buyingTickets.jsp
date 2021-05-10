@@ -6,38 +6,44 @@
   To change this template use File | Settings | File Templates.
 --%>
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <!DOCTYPE html>
 <html>
 <head>
     <title>Сайт авиакомпании</title>
-    <link rel="stylesheet" href="/resourses/css/style7.css" >
+    <link rel="stylesheet" href="/resources/css/style4.css">
 </head>
 
 <body>
-<form class = "navigation">
-    <div class = "raz">
-        <a class = "title">SKY AIRLINES</a>
+<form  method="get"
+       action="/tickets" modelAttribute="flight_number"/>
+<form class="navigation">
+    <div class="raz">
+        <a class="title">SKY AIRLINES</a>
         <a class="c" href="#">ИНФОРМАЦИЯ</a>
         <a class="c" href="#">КУПИТЬ БИЛЕТ</a>
-        <a class="c" href="авторизация.html">ВХОД/РЕГИСТРАЦИЯ</a>
+        <a class="c" href="../../../../../../../../../фронт/авторизация.html">ВХОД/РЕГИСТРАЦИЯ</a>
         <a class="c1" href="#">ВЫЙТИ</a>
     </div>
     <br><b></b></br>
-    <h1 align = "center" class = "title">Покупка билета</h1>
+    <h1 align="center" class="title">Покупка билета</h1>
 </form>
 <br><b></b></br>
-<form>
-    <h2 align = "left">Информация о рейсе</h2>
+<form  method="get"
+       action="/tickets" modelAttribute="flight_number"/>
+<div class="form">
+    <h2 align="left">Информация о рейсе</h2>
     <table align="center" class="block">
-        <tr >
-            <th><h3>Санкт-Петербург (LED)</h3></th>
-            <th><h3>Москва (VKO)</h3></th>
-            <th><h3>SU 6035</h3></th>
-            <th><h3>12:55</h3></th>
-            <th><h3>14:25</h3></th>
+        <tr>
+            <th><h3>${flight.departure_city}</h3></th>
+            <th><h3>${flight.arrival_city}</h3></th>
+            <th><h3>${flight.flight_number}</h3></th>
+            <th><h3>${flight.departure_time}</h3></th>
+            <th><h3>${flight.arrival_time}</h3></th>
         </tr>
     </table>
-    <h2 align = "left">Введите данные пассажира</h2>
+
+    <h2 align="left">Введите данные пассажира</h2>
 
     <input id = "from" class ="from" placeholder="Фамилия" type="text" name="from"  required>
     <input id = "to" class ="to" placeholder="Имя" type="text" name="to"  required="required">
@@ -81,6 +87,7 @@
     <div align = "center">
         <input type="submit" class ="pay" value="Оплатить">
     </div>
+</div>
 </form>
 <p><img src="https://lime-stone.ru/image/cache/data/gallery/granit/gabbrodiabaz-920x690.jpg "height="0.5" width="100%"></p>
 

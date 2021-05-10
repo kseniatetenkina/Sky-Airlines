@@ -11,6 +11,7 @@ import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 
+import javax.servlet.http.HttpServletRequest;
 import java.util.ArrayList;
 
 @Controller
@@ -30,6 +31,14 @@ public class AuthController {
 
     @GetMapping("/userTest")
     public User getUser() {
-        return userDaoImpl.getUserByMail("login@gmail.com");
+        return userDaoImpl.getUserByEmail("login@gmail.com");
+    }
+
+    @RequestMapping("/default")
+    public String defaultAfterLogin(HttpServletRequest request) {
+        if (request.isUserInRole("ROLE_ADMIN")) {
+            return "redirect:/admin/";
+        }
+        return "redirect:/main/";
     }
 }

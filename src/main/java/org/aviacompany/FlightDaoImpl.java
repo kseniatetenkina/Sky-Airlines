@@ -10,7 +10,7 @@ import java.util.Date;
 import java.util.List;
 
 @Component
-public class FlightDaoImpl   {
+public class FlightDaoImpl {
 
     @Autowired
     private SessionFactory sessionFactory;
@@ -19,18 +19,19 @@ public class FlightDaoImpl   {
         return sessionFactory.openSession();
     }
 
-//    @Override
+    //    @Override
     public List<Flight> getAll() {
         List<Flight> flights = getSession().createQuery("From Flight ", Flight.class).list();
         System.out.println(flights.size());
-        /*for (Flight Flight : Flights) {
-            System.out.println(Flight.getLogin() + " " + Flight.getPassword());
-        }*/
+        for (Flight flight : flights) {
+            flight.setDeparture_date(new Date(flight.getDeparture_date().toString()));
+            System.out.println(flight.getDeparture_city() + " " + flight.getArrival_city());
+        }
         return flights;
     }
 
-//    @Override
-    public Object getById(int id) {
+    //    @Override
+    public Flight getById(int id) {
         Flight flight = null;
         try {
             List<Flight> flights = getSession().createQuery("From Flight where id = " + id, Flight.class).list();
@@ -40,11 +41,12 @@ public class FlightDaoImpl   {
         } catch (Exception e) {
             e.printStackTrace();
         }
-        return flight;    }
+        return flight;
+    }
 
-//    @Override
+    //    @Override
     public void add(Object flight) {
-        getSession().save( flight);
+        getSession().save(flight);
     }
 
     public Flight getFlight(String login) {
@@ -64,20 +66,20 @@ public class FlightDaoImpl   {
         return null;
     }
 
-    public List<Flight> searchFlightsByCitiesAndByDates(Flight flightData) {
-        String departureCity = flightData.getDepartureCity();
-        String arrivalCity = flightData.getArrivalCity();
-        Date departureDate = flightData.getDepartureDate();
-        Date arrivalDate = flightData.getArrivalDate();
-        java.sql.Date departure_date = new java.sql.Date(departureDate.getTime());
+    public List<Flight> findFlightsByCitiesAndDates(Flight flight) {
+        String departureCity = flight.getDeparture_city();
+        String arrivalCity = flight.getArrival_city();
+        java.sql.Date departureDate = new java.sql.Date(flight.getArrival_date().getTime());
         try {
-            List<Flight> flights = getSession().createQuery("From Flight where departureCity  like " + "'" + departureCity + "' " + " and arrivalCity like " + " '" + arrivalCity + "' " + " and departure_date = " +   departure_date  , Flight.class).list();
-            if (flights != null) {
+            List<Flight> flights = getSession().createQuery("From Flight where departure_city like " + "'" + departureCity + "' and arrival_city like " + "'" + arrivalCity + "' and departure_date like " +"'" + departureDate + "%'" , Flight.class)
+                    .list();
+            if (flight != null) {
                 return flights;
             }
         } catch (Exception e) {
             e.printStackTrace();
         }
         return null;
+
     }
 }

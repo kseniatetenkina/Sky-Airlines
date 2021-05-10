@@ -11,6 +11,7 @@ import org.springframework.security.config.annotation.web.configuration.EnableWe
 import org.springframework.security.config.annotation.web.configuration.WebSecurityConfigurerAdapter;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
+import org.springframework.security.core.GrantedAuthority;
 
 @Configuration
 @EnableWebSecurity
@@ -19,22 +20,26 @@ import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 public class SecurityConfig extends WebSecurityConfigurerAdapter {
     @Autowired
     private AuthProviderImpl authProvider;
+
+
     @Override
-    protected void configure(HttpSecurity http) throws Exception{
-
-
+    protected void configure(HttpSecurity http) throws Exception {
         http.authorizeRequests()
-                .antMatchers( "/login").anonymous()  // это url, который доступен неавторизованным пользователям
-                .antMatchers("/window").authenticated()  // доступна только авторизованным пользователям
-                .and().csrf().disable()  // доп шифрование, поэтому выкл
+                .antMatchers("/login", "/reg", "/addUser").anonymous()
+                .antMatchers("/main").hasAuthority("ROLE_USER")
+                .antMatchers("/admin").hasAuthority("ROLE_ADMIN").anyRequest().authenticated()
+                .and().csrf().disable()
                 .formLogin()
-                .loginPage("/login")  // отвечает за форму регистрации
-                .loginProcessingUrl("/login/process")  // url на который посылается данные пользовтеля
-                .usernameParameter("email") // указываем, что будет емайл
+                .loginPage("/login")
+                .loginProcessingUrl("/login/process")
+                .usernameParameter("email")
                 .failureUrl("/login")
-                .defaultSuccessUrl("/main", true)
-                .and().logout();  //пользователь может выйти
+                .defaultSuccessUrl("/default", true)
+                .and().logout().permitAll(); //
     }
+
+
+
 
 
     @Override
