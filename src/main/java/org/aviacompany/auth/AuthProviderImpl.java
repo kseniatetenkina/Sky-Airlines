@@ -27,19 +27,24 @@ public class AuthProviderImpl implements AuthenticationProvider {
     }
     @Override
     public Authentication authenticate(Authentication authentication) throws AuthenticationException{
-        System.out.println("Мы в методе авторизации");
+        System.out.println("В методе авторизации");
         String email = authentication.getName();
-        User user = usersDao.getUserByMail( email);
-        if(user == null){
-
+        System.out.println("authentication.getName() = " + authentication.getName());
+        User user = usersDao.getUserByEmail(email);
+        if(user == null) {
             throw new UsernameNotFoundException("User not found");
         }
         String password = authentication.getCredentials().toString();
-        System.out.println("Password = " + password);
-        if(!passwordEncoder.matches(password, user.getPassword())){
+        System.out.println("password = " + password);
+        System.out.println("user.getPassword() = " + user.getPassword());
+        System.out.println("user.getRole = " + user.getRole());
+        System.out.println(user.getRole().getAuthority());
+        if(!passwordEncoder.matches(password,user.getPassword())){
             throw new BadCredentialsException("Bad credentials");
         }
         List<GrantedAuthority> authorities = new ArrayList<>();
+        authorities.add(user.getRole());
+//        authorities.add(Role.ROLE_ADMIN);
         return new UsernamePasswordAuthenticationToken(user,null,authorities);
     }
     @Override

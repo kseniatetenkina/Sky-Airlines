@@ -6,30 +6,31 @@
   To change this template use File | Settings | File Templates.
 --%>
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
-<html xmlns:form="http://www.w3.org/1999/xhtml">
+<!DOCTYPE html>
+<html>
 <head>
     <meta charset="UTF-8">
+    <title>Form</title>
+    <link rel="stylesheet" href="/resources/css/style2.css" >
 </head>
 <body>
-<h3>Welcome, Enter The User Details</h3>
-<form  method="post"
-       action="/addUser" modelAttribute="user"/>
-<table>
-    <div>
-        Login: <input name="login" type="login">
+<form action="/reg" , method="post", modelAttribute="user"/>
+
+<div class="form">
+    <h1 class="title">Регистрация нового аккаунта</h1>
+    <div class="input-email">
+        <input class="email" name="email" type="email" placeholder="Введите email">
     </div>
-    <div>
-        Password: <input name="password" type="password">
+    <div class="input-password">
+        <input class="password" name="password" type="password" placeholder="Придумайте пароль">
     </div>
-    <div>
-        Email: <input name="email" type="email">
+    <div class="block">
+        <p class="text">Нажимая кнопку "Зарегистрироваться" Вы даете согласие на обработку своих персональных данных.</p>
     </div>
-    <div>
-        Role: <input name="role" type="role">
+    <div class="input-submit">
+        <input type="submit" class="submit" value="Зарегистрироваться">
     </div>
-    <div class="input-form">
-        <input type="submit" value="AddUser">
-    </div>
-</table>
+</div>
+
 </body>
 </html>

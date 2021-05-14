@@ -5,13 +5,14 @@
   Time: 18:50
   To change this template use File | Settings | File Templates.
 --%>
+<%@ taglib prefix="form" uri="http://www.springframework.org/tags/form" %>
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 <!DOCTYPE html>
 <html>
 <head>
     <meta charset="UTF-8">
     <title>Form</title>
-    <link rel="stylesheet" href="/resourses/css/style.css" >
+    <link rel="stylesheet" href="/resources/css/style.css" >
 </head>
 <body>
 <form action="/login/process" , method="post"/>

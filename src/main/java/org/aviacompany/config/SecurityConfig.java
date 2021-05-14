@@ -20,22 +20,21 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
     @Autowired
     private AuthProviderImpl authProvider;
     @Override
-    protected void configure(HttpSecurity http) throws Exception{
-
-
+    protected void configure(HttpSecurity http) throws Exception {
         http.authorizeRequests()
-                .antMatchers( "/login").anonymous()  // это url, который доступен неавторизованным пользователям
-                .antMatchers("/window").authenticated()  // доступна только авторизованным пользователям
-                .and().csrf().disable()  // доп шифрование, поэтому выкл
+                .antMatchers("/resources/**").permitAll()
+                .antMatchers("/login", "/reg", "/addUser").anonymous() //URL, которые доступны только неавтризованным пользователям
+                .antMatchers( "/main", "/currentUser").hasAuthority("ROLE_USER")
+                .antMatchers("/admin", "/list", "/currentUser").hasAuthority("ROLE_ADMIN").anyRequest().authenticated()
+                .and().csrf().disable()
                 .formLogin()
-                .loginPage("/login")  // отвечает за форму регистрации
-                .loginProcessingUrl("/login/process")  // url на который посылается данные пользовтеля
-                .usernameParameter("email") // указываем, что будет емайл
+                .loginPage("/login") // где у нас форма - на этом хендлере
+                .loginProcessingUrl("/login/process") //Url, на который у нас посылаются данные пользователя для обработки, его будет обрабатывать спринг
+                .usernameParameter("email") // по дефолту username в спринге - username, поэтому мы указываем, что у нас email
                 .failureUrl("/login")
-                .defaultSuccessUrl("/main", true)
-                .and().logout();  //пользователь может выйти
+                .defaultSuccessUrl("/default", true)
+                .and().logout().permitAll(); //
     }
-
 
     @Override
     protected void configure(AuthenticationManagerBuilder auth) throws Exception{

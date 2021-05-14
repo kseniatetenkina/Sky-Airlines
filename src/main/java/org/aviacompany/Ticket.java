@@ -1,12 +1,11 @@
 package org.aviacompany;
 
 import javax.persistence.*;
-import java.util.Calendar;
-
+import java.time.LocalTime;
+import java.util.Date;
 
 @Entity
 @Table(name = "tickets")
-
 
 public class Ticket  {
 
@@ -16,12 +15,10 @@ public class Ticket  {
     private long id;
     @Column(name = "ticket_price")
     private int ticket_price;
-    @Column(name = "ticket_holder")
-    private String ticket_holder;
+    @Column(name = "user_id")
+    private long user_id;
     @Column(name = "flight_number")
     private int flight_number;
-//    private Calendar departure_date;
-//    private Calendar arrival_date;
     @Column(name = "departure_city")
     private String departure_city;
     @Column(name = "arrival_city")
@@ -30,22 +27,31 @@ public class Ticket  {
     private String departure_airport;
     @Column(name = "arrival_airport")
     private String arrival_airport;
-
+    @Column(name = "departure_date")
+    private Date departure_date;
+    @Column(name = "arrival_date")
+    private Date arrival_date;
+    @Column(name = "departure_time")
+    private LocalTime departure_time;
+    @Column(name = "arrival_time")
+    private LocalTime arrival_time;
 
 
     public Ticket() {
     }
 
-    public Ticket(int ticket_price, String ticket_holder, int flight_number,  String departure_city, String arrival_city, String departure_airport, String arrival_airport) {
+    public Ticket(int ticket_price, long user_id, int flight_number,  String departure_city, String arrival_city, String departure_airport, String arrival_airport, Date departure_date,Date arrival_date, LocalTime departure_time, LocalTime arrival_time) {
         this.ticket_price = ticket_price;
-        this.ticket_holder = ticket_holder;
+        this.user_id = user_id;
         this.flight_number = flight_number;
-//        this.departure_date = departure_date;
-//        this.arrival_date = arrival_date;
         this.departure_city = departure_city;
         this.arrival_city = arrival_city;
         this.departure_airport = departure_airport;
         this.arrival_airport = arrival_airport;
+        this.departure_date = departure_date;
+        this.arrival_date = arrival_date;
+        this.departure_time = departure_time;
+        this.arrival_time = arrival_time;
     }
 
     public int getTicket_price() {
@@ -56,12 +62,12 @@ public class Ticket  {
         this.ticket_price = ticket_price;
     }
 
-    public String getTicket_holder() {
-        return ticket_holder;
+    public long getUser_id() {
+        return user_id;
     }
 
-    public void setTicket_holder(String ticket_holder) {
-        this.ticket_holder = ticket_holder;
+    public void setUser_id(int user_id) {
+        this.user_id = user_id;
     }
 
     public int getFlight_number() {
@@ -71,22 +77,6 @@ public class Ticket  {
     public void setFlight_number(int flight_number) {
         this.flight_number = flight_number;
     }
-
-//    public Calendar getDeparture_date() {
-//        return departure_date;
-//    }
-//
-//    public void setDeparture_date(Calendar departure_date) {
-//        this.departure_date = departure_date;
-//    }
-//
-//    public Calendar getArrival_date() {
-//        return arrival_date;
-//    }
-//
-//    public void setArrival_date(Calendar arrival_date) {
-//        this.arrival_date = arrival_date;
-//    }
 
     public String getDeparture_city() {
         return departure_city;
@@ -118,5 +108,54 @@ public class Ticket  {
 
     public void setArrival_airport(String arrival_airport) {
         this.arrival_airport = arrival_airport;
+    }
+
+    public Date getDeparture_date() {
+        return departure_date;
+    }
+
+    public void setDeparture_date(Date departure_date) {
+        this.departure_date = departure_date;
+    }
+
+    public Date getArrival_date() {
+        return arrival_date;
+    }
+
+    public void setArrival_date(Date arrival_date) {
+        this.arrival_date = arrival_date;
+    }
+
+    public LocalTime getDeparture_time() {
+        return departure_time;
+    }
+
+    public void setDeparture_time(LocalTime departure_time) {
+        this.departure_time = departure_time;
+    }
+
+    public LocalTime getArrival_time() {
+        return arrival_time;
+    }
+
+    public void setArrival_time(LocalTime arrival_time) {
+        this.arrival_time = arrival_time;
+    }
+    @Override
+    public String toString() {
+        return "Ticket{" +
+                "id=" + id +
+                ", ticket_price=" + ticket_price +
+                ", user_id=" + user_id +
+                ", flight_number=" + flight_number +
+                ", departure_city='" + departure_city + '\'' +
+                ", arrival_city='" + arrival_city + '\'' +
+                ", departure_airport='" + departure_airport + '\'' +
+                ", arrival_airport='" + arrival_airport + '\'' +
+                ", departure_date=" + departure_date +
+                ", arrival_date=" + arrival_date +
+                ", departure_time=" + departure_time +
+                ", arrival_time=" + arrival_time +
+                '}';
     }
 }

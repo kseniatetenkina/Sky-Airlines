@@ -3,6 +3,8 @@ package org.aviacompany.controllers;
 import org.aviacompany.*;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.propertyeditors.CustomDateEditor;
+import org.springframework.security.core.Authentication;
+import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.ui.ModelMap;
@@ -61,47 +63,105 @@ public class MainController {
 
     }
 
+
     @RequestMapping(value = "/reg", method = RequestMethod.POST)
     public String reg(@ModelAttribute("user") User user, BindingResult result, ModelMap model) {
         if (result.hasErrors()) {
             return "Error";
         }
-        user.setRole("user");
+        user.setLogin(user.getEmail());
+        user.setRole(Role.ROLE_USER);
         model.addAttribute("password", user.getPassword());
+        System.out.println(user.getPassword());
+        System.out.println(user.getEmail());
         model.addAttribute("email", user.getEmail());
         userDaoImpl.add(user);
-        return "main";
+        return "login";
 
     }
+
+
 
     @RequestMapping(value = "/reg", method = RequestMethod.GET)
     public String reg() {
-        return "registration1";
+        return "registration";
     }
 
-    @RequestMapping(value = "/flightSearch", method = RequestMethod.GET)
-    public ModelAndView flightSearch(@ModelAttribute("flight") Flight flightData, Model model){
-        ModelAndView map = new ModelAndView("flightSchedule");
-        model.addAttribute("flight", flightData);
-        System.out.println(flightData);
-        List<Flight> flights = flightDao.searchFlightsByCitiesAndByDates(flightData);
-        for(Flight flight : flights){
-            System.out.println(java.sql.Date.valueOf(flight.getArrivalDate().toString()));
-            java.sql.Date sqlDate = new java.sql.Date(flight.getArrivalDate().getTime());
-            System.out.println(sqlDate);
+//    @RequestMapping(value = "/flights_search", method = RequestMethod.GET)
+//    public String flights_search(@ModelAttribute("flight") Flight flight, BindingResult result, ModelMap map) {
+//        List<Flight> flights = flightDao.findFlightsByCitiesAndDates(flight);
+//        return "flights_search";
+//    }
 
-            System.out.println(flight.getArrivalDate());
-        }
-        User user1 = new User();
-        user1.setPassword("12345");
-        user1.setEmail("user1@mail.ru");
-        user1.setId(99);
+    @RequestMapping(value = "/flights", method = RequestMethod.POST)
+    public ModelAndView fly(@ModelAttribute("flight") Flight flight, Model model) {
+        model.addAttribute("flight", flight);
+        List<Flight> flights = flightDao.findFlightsByCitiesAndDates(flight);
+        ModelAndView map = new ModelAndView("schedule");
         map.addObject("flights", flights);
-        map.addObject("Пассажир", user1);
         return map;
     }
 
+    @RequestMapping(value = "/ticket_buying", method = RequestMethod.GET)
+    public String ticketBuying(@ModelAttribute("flight") Flight flight) {
+        return "/buying";
+    }
 
+    @RequestMapping(value = "/ticket_buying/{flightId}", method = RequestMethod.GET)
+    public ModelAndView ticketBuying(@PathVariable int flightId) {
+        System.out.println("Hello");
+        Flight flight = flightDao.getById(flightId);
+        ModelAndView map = new ModelAndView("/buying");
+        map.addObject("flight", flight);
+        return map;
+    }
+
+    @RequestMapping(value = "/tickets", method = RequestMethod.GET)
+    public ModelAndView tickets(@ModelAttribute("flight_id") int flight_id) {
+        Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
+        User u = (User) authentication.getPrincipal();
+        Flight flight = flightDao.getById(flight_id);
+        Ticket ticket = new Ticket(flight.getFlight_price(),u.getId(),flight.getFlight_number(), flight.getDeparture_city(), flight.getArrival_city(), flight.getDeparture_airport(), flight.getArrival_airport(), flight.getDeparture_date(), flight.getArrival_date(), flight.getDeparture_time(), flight.getArrival_time());
+        User user= userDaoImpl.getUserById(ticket.getUser_id());
+        int newUserCash = user.getMoney()-ticket.getTicket_price();
+        user.setMoney(newUserCash);
+        boolean isEnoughMoney = userDaoImpl.updateUsersCash(user);
+          String message = "";
+        if(isEnoughMoney) {
+            ticketDao.add(ticket);
+            message = "Билет был успешно куплен";
+        } else{
+            message = "Недостаточно денег для покупки билета";
+        }
+        ModelMap modelMap = new ModelMap();
+        modelMap.addAttribute("message", message);
+        ModelAndView map = new ModelAndView("tickets",modelMap);
+        List<Ticket> ticketsOfUser = ticketDao.getTicketsByUser(user.getId());
+        for(Ticket t : ticketsOfUser){
+            System.out.println("В цикле");
+            System.out.println(t);
+        }
+        map.addObject("tickets", ticketsOfUser);
+        return map;
+    }
+
+    @RequestMapping(value = "/registerFlight", method = RequestMethod.POST)
+    public String regFlight(@ModelAttribute("flight") Flight flight,
+                            BindingResult result, ModelMap model) {
+        System.out.println("В методе добавления пользователя");
+        if (result.hasErrors()) {
+            return "error";
+        }
+        flightDao.add(flight);
+        System.out.println(flight);
+        System.out.println(flight.getDeparture_time().toString());
+        return "admin";
+    }
+
+    @RequestMapping(value = "/admin", method = RequestMethod.GET)
+    public String adminPage() {
+        return "admin";
+    }
 
 
     @GetMapping("/flights")
@@ -109,10 +169,7 @@ public class MainController {
         return flightDao.getAll();
     }
 
-    @GetMapping("/tickets")
-    public List<Ticket> getTicket() {
-        return ticketDao.getAll();
-    }
+
 
     @GetMapping("/cities")
     public List<City> getCity() {

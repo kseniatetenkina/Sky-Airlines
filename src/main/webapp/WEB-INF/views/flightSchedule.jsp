@@ -11,7 +11,7 @@
 <html>
 <head>
     <title>Сайт авиакомпании</title>
-    <link rel="stylesheet" href="/resourses/css/style4.css" >
+    <link rel="stylesheet" href="/resources/css/style4.css" >
 </head>
 
 <body>
