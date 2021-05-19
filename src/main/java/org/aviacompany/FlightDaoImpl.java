@@ -22,7 +22,7 @@ public class FlightDaoImpl {
     //    @Override
     public List<Flight> getAll() {
         List<Flight> flights = getSession().createQuery("From Flight ", Flight.class).list();
-        System.out.println(flights.size());
+        System.out.println("количество рейсов "+flights.size());
         for (Flight flight : flights) {
             flight.setDeparture_date(new Date(flight.getDeparture_date().toString()));
             System.out.println(flight.getDeparture_city() + " " + flight.getArrival_city());
@@ -80,5 +80,12 @@ public class FlightDaoImpl {
             e.printStackTrace();
         }
         return null;
+    }
+
+
+    public List<Flight> getAllFlights() {
+        List<Flight> flights = getSession().createQuery("From Flight ", Flight.class).list();
+        System.out.println("количество рейсов "+flights.size());
+        return flights;
     }
 }

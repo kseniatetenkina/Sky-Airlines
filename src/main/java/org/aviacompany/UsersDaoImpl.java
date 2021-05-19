@@ -102,4 +102,14 @@ public class UsersDaoImpl {
             return false;
         }
     }
+
+    public void changeUsersRole(User user, String role){
+        if(role == "admin"){
+            user.setRole(Role.ROLE_ADMIN);
+        } else if(role == "user"){
+            user.setRole(Role.ROLE_USER);
+        }
+
+
+    }
 }

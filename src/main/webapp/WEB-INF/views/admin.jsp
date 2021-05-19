@@ -6,17 +6,20 @@
   To change this template use File | Settings | File Templates.
 --%>
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
+<!DOCTYPE html>
 <html>
 <head>
     <meta charset="UTF-8">
     <title>Form</title>
-    <link rel="stylesheet" href="/resources/css/style6.css" >
+    <link rel="stylesheet" href="/resources/css/admin_style.css" >
 </head>
 <body>
+
+<div><a class="submit2" href="/view_flights">Посмотреть рейсы</a></div>
 <a class="c1" href="/logout">ВЫЙТИ</a>
-<a class="c1" href="/view_flights">Посмотреть рейсы</a>
-<form  method="post"
-       action="/registerFlight" modelAttribute="flight"/>
+
+<form  method="post",
+       action="/registerFlight", modelAttribute="flight"/>
 <div class="form">
     <h1 class="title">Регистрация нового рейса</h1>
     <div class="input-town">
@@ -32,10 +35,10 @@
         <label style="color: aliceblue;">Введите дату вылета</label>
         <input class="departure_date" type="date" name = "departure_date" placeholder="Введите дату вылета" required>
     </div>
-    <div class="input-town">
-        <label style="color: aliceblue;">Введите дату прилёта</label>
-        <input class="arrival_date" type="date" name = "arrival_date" placeholder="Введите дату прилёта" required>
-    </div>
+    <!--  <div class="input-town">
+          <label style="color: aliceblue;">Введите дату прилёта</label>
+          <input class="arrival_date" type="date" name = "arrival_date" placeholder="Введите дату прилёта" required>
+      </div>-->
     <div class="input-town">
         <label style="color: aliceblue;">Введите время вылета</label>
         <input class="departure_time" type="time"  name = "departure_time" placeholder="Введите время вылета" required>
@@ -58,6 +61,10 @@
     </div>
 
     <input type="submit" class="submit" value="Зарегистрировать рейс">
+
+
+
+
 
 </div>
 

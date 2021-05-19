@@ -1,0 +1,114 @@
+
+body {
+    margin: 0%;
+    margin-left: 15px;
+    margin-right: 15px;
+    background: #F8F8FF; 
+    font-family: sans-serif;  
+}
+
+.c1 {
+    position: absolute;
+    right: 0;
+}
+table, th, td 
+{
+    text-align: center;
+}
+
+th
+        {
+            width: 200px;
+        }
+.title
+        {
+            margin: 0%;
+            color: #2F4F4F;
+            font-size: 40px;
+            font-family:century gothic, Arial, sans-serif;
+            font-weight: bold;
+            
+        }
+.links
+        {
+            color: #4682B4;
+        }
+.text
+        {
+            color: #2F4F4F;
+            font-size: 45px;
+
+        }
+.text2
+        {
+            color: #2F4F4F;
+            font-size: 20px;
+        }
+.text3
+        {
+            color: #2F4F4F;
+            font-size: 20px;
+        }
+.tabl
+        {
+            color: #2F4F4F;
+            font-size: 40px;    
+        }
+        .c {
+            display: inline-block;
+            padding: 5px 15px; 
+            text-decoration: none; 
+            color: #4682B4; 
+            }
+        .c1 {
+            position: absolute;
+            right: 0;
+            padding: 5px 15px; 
+            color: #4682B4; 
+            }
+        .c:hover, .c1:hover {
+            color: rgb(4, 37, 53);
+            }
+.departure_city, .arrival_city, .departure_date{
+    padding: 10px;
+	width: 250px;
+    height: 60px;
+	color: #000;
+	font-size: 20px;
+	background: #d5f0ff;
+	outline: none;
+	border: 1px solid rgb(255, 255, 255);
+	box-sizing: border-box;
+    border-radius: 10px;
+}
+
+
+.departure_city:hover, .arrival_city:hover, .departure_date:hover, .date2:hover{
+    border: 1px solid #0fc3f5;
+}
+
+
+.submit {
+	padding: 10px;
+	width: 250px;
+    height: 50px;
+	color: #fff;
+	font-size: 16px;
+	background: none;
+	outline: none;
+	border: 1px solid #fff;
+	box-sizing: border-box;
+    border-radius: 10px;
+	color: #fff;
+	font-weight: bold;
+	
+	border: none;
+	background: #6eb3db;
+
+    border-radius: 30px;
+}
+
+.submit:hover {
+	background: #258aa8;
+}
+

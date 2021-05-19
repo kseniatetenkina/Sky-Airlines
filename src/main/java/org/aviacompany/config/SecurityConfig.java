@@ -25,7 +25,7 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
                 .antMatchers("/resources/**").permitAll()
                 .antMatchers("/login", "/reg", "/addUser").anonymous() //URL, которые доступны только неавтризованным пользователям
                 .antMatchers( "/main", "/currentUser").hasAuthority("ROLE_USER")
-                .antMatchers("/admin", "/list", "/currentUser").hasAuthority("ROLE_ADMIN").anyRequest().authenticated()
+                .antMatchers("/admin", "/list", "/currentUser", "/view_flights").hasAuthority("ROLE_ADMIN").anyRequest().authenticated()
                 .and().csrf().disable()
                 .formLogin()
                 .loginPage("/login") // где у нас форма - на этом хендлере

@@ -145,6 +145,17 @@ public class MainController {
         return map;
     }
 
+
+    @RequestMapping(value = "/view_tickets", method = RequestMethod.GET)
+    public ModelAndView viewTickets(@ModelAttribute("ticket") Ticket ticket) {
+        Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
+        User u = (User) authentication.getPrincipal();
+        ModelAndView map = new ModelAndView("view_tickets");
+        List<Ticket> ticketsOfUser = ticketDao.getTicketsByUser(u.getId());
+        map.addObject("tickets", ticketsOfUser);
+        return map;
+    }
+
     @RequestMapping(value = "/registerFlight", method = RequestMethod.POST)
     public String regFlight(@ModelAttribute("flight") Flight flight,
                             BindingResult result, ModelMap model) {
@@ -158,16 +169,36 @@ public class MainController {
         return "admin";
     }
 
+
+
+    @RequestMapping(value = "/view_flights", method = RequestMethod.GET)
+    public ModelAndView viewFlights(@ModelAttribute("flight") Flight flight, Model model) {
+        model.addAttribute("flight", flight);
+        List<Flight> flights = flightDao.getAllFlights();
+        ModelAndView map = new ModelAndView("view_flights");
+        map.addObject("flights", flights);
+        return map;
+    }
+
+
+
     @RequestMapping(value = "/admin", method = RequestMethod.GET)
     public String adminPage() {
         return "admin";
     }
 
 
-    @GetMapping("/flights")
-    public List<Flight> getFlight() {
-        return flightDao.getAll();
-    }
+
+
+
+//    @RequestMapping(value = "/change_role", method = RequestMethod.POST)
+//    public String changeRole(@ModelAttribute("user") User user){
+//        user = userDaoImpl.getUserById()
+//    }
+
+
+
+
 
 
 

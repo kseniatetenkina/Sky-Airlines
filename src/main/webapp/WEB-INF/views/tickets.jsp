@@ -18,11 +18,8 @@
 
 <form class = "navigation">
     <div class = "raz">
-        <a class = "title">SKY AIRLINES</a>
-        <a class="c" href="#">ЛИЧНЫЙ КАБИНЕТ</a>
-        <a class="c" href="#">КУПИТЬ БИЛЕТ</a>
-        <a class="c" href="авторизация.html">ВХОД/РЕГИСТРАЦИЯ</a>
-        <a class="c1" href="#">ВЫЙТИ</a>
+        <a class="title" href="/main">SKY AIRLINES</a>
+        <a class="c1" href="/logout">ВЫЙТИ</a>
     </div>
     <br><b></b></br>
     <h1 align = "center" class = "title">Мои билеты</h1>
@@ -31,7 +28,7 @@
 <form class="schedule">
 
     <c:if test="${not empty message}">
-        <p id="panel"> <c:out value="${message}"/></p>
+        <p id="panel" align="center"> <c:out value="${message}"/></p>
     </c:if>
 
     <c:if test="${not empty tickets}">
@@ -91,6 +88,9 @@
             <th><h3>${ticket.user_id}</h3></th>
         </tr>
     </table>
+        <br>
+
+        </br>
     </c:forEach>
     </c:if>
 

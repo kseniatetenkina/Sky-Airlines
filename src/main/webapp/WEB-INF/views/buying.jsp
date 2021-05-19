@@ -7,11 +7,13 @@
 --%>
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
+
+
 <!DOCTYPE html>
 <html>
 <head>
     <title>Сайт авиакомпании</title>
-    <link rel="stylesheet" href="/resources/css/style4.css">
+    <link rel="stylesheet" href="/resources/css/buying_style.css">
 </head>
 
 <body>
@@ -19,11 +21,8 @@
        action="/tickets" modelAttribute="flight_number"/>
 <form class="navigation">
     <div class="raz">
-        <a class="title">SKY AIRLINES</a>
-        <a class="c" href="#">ИНФОРМАЦИЯ</a>
-        <a class="c" href="#">КУПИТЬ БИЛЕТ</a>
-        <a class="c" href="../../../../../../../../../фронт/авторизация.html">ВХОД/РЕГИСТРАЦИЯ</a>
-        <a class="c1" href="#">ВЫЙТИ</a>
+        <a class="title" href="/main">SKY AIRLINES</a>
+        <a class="c1" href="/logout">ВЫЙТИ</a>
     </div>
     <br><b></b></br>
     <h1 align="center" class="title">Покупка билета</h1>
@@ -33,13 +32,30 @@
        action="/tickets" modelAttribute="flight_number"/>
 <div class="form">
     <h2 align="left">Информация о рейсе</h2>
+    <table align="center" class="schedule1">
+        <tr>
+            <th><h2>Город вылета</h2></th>
+            <th><h2>Аэропорт</h2></th>
+            <th><h2>Город прилета</h2></th>
+            <th><h2>Аэропорт</h2></th>
+            <th><h2>Номер рейса</h2></th>
+            <th><h2>Дата рейса</h2></th>
+            <th><h2>Время вылета</h2></th>
+            <th><h2>Время прилета</h2></th>
+            <th><h2>Цена</h2></th>
+        </tr>
+    </table>
     <table align="center" class="block">
         <tr>
             <th><h3>${flight.departure_city}</h3></th>
+            <th><h3>${flight.departure_airport}</h3></th>
             <th><h3>${flight.arrival_city}</h3></th>
+            <th><h3>${flight.arrival_airport}</h3></th>
             <th><h3>${flight.flight_number}</h3></th>
+            <th><h3>${flight.departure_date}</h3></th>
             <th><h3>${flight.departure_time}</h3></th>
             <th><h3>${flight.arrival_time}</h3></th>
+            <th><h3>${flight.flight_price}</h3></th>
         </tr>
     </table>
 
@@ -65,7 +81,6 @@
     <p><img src="https://lime-stone.ru/image/cache/data/gallery/granit/gabbrodiabaz-920x690.jpg " height="0.5"
             width="100%"></p>
     <h2 align="center">Оплата</h2>
-    <%--    <form action="/lk" , method="post"/>--%>
     <table align="center" class="card">
         <tr>
             <th><label for="number">Номер карты</label>
@@ -87,40 +102,14 @@
     <br><b></b></br>
     <input type="flight_id" hidden class="flight_id" value = "${flight.id}" name = "flight_id">
     <div align="center">
-        <input type="submit" class="submit" value="Оплатить">
+        <input type="submit" class="pay" value="Оплатить">
     </div>
 </div>
-<%--</form>--%>
+
 <p><img src="https://lime-stone.ru/image/cache/data/gallery/granit/gabbrodiabaz-920x690.jpg " height="0.5" width="100%">
 </p>
 
 <br><b></b></br>
-<table align="center">
-    <tr>
-        <th><a class="c">О КОМПАНИИ</a></th>
-        <th><a class="c">ДОПОЛНИТЕЛЬНЫЕ УСЛУГИ</a></th>
-        <th><a class="c">МЫ В СОЦСЕТЯХ</a></th>
-        <th><a class="c">ГОРЯЧАЯ ЛИНИЯ</a></th>
-    </tr>
-    <tr>
-        <th>Новости</th>
-        <th>Бронирование отелей</th>
-        <th>Instagram</th>
-        <th>+7(999)123-45-67</th>
-    </tr>
-    <tr>
-        <th>Партнеры</th>
-        <th>Аренда авто</th>
-        <th>VK</th>
-        <th></th>
-    </tr>
-    <tr>
-        <th>Политика конфиденциальности</th>
-        <th>Приоритетная посадка</th>
-        <th>Twitter</th>
-        <th></th>
-    </tr>
-</table>
-<br></br>
+
 <p align="right" class="text3">© 2021, ООО «SKY AIRLINES»</p>
 </body>

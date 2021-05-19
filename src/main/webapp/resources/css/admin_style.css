@@ -1,0 +1,120 @@
+body {
+	background: linear-gradient(rgba(0,0,0,.3),rgba(0,0,0,.3)), 
+	url(https://proprikol.ru/wp-content/uploads/2020/12/samolety-krasivye-kartinki-56.jpg);
+	-webkit-background-size: cover;
+	background-size: cover;
+	background-attachment: scroll;
+	font-family: sans-serif; 
+	height:900px;  
+}
+
+.c1 {
+	font-size: 20px;
+	position: absolute;
+	right: 0;
+	padding: 5px 15px; 
+	color: rgb(255, 255, 255);
+	}
+.c1:hover {
+	color: #4682B4; 
+	}
+
+div.form {
+	width: 500px;
+	height: 820px;
+	position: absolute;
+	left: 30%;
+	background: rgba(31, 31, 31, 0.7);
+	border-radius: 10px;
+}
+
+.title {
+    margin: 30px 13px;
+	padding: 0;
+	text-align: center;
+	color: rgb(236, 236, 236);
+	font-size: 22px;
+	text-transform: uppercase;
+}
+
+.block {
+    margin-left: 10px;
+    margin-right: 10px;
+}
+
+.text {
+    color: rgb(252, 252, 252);
+    text-align: center;
+    font-size: 12px;
+}
+
+.input-town, .input-password, .input-submit {
+    margin: 15px 27px;
+	text-align: center;
+}
+.departure_city, .arrival_city, .flight_number, 
+.departure_date, .arrival_date, .departure_time, 
+.arrival_time, .departure_airport, .arrival_airport, .flight_price{
+    padding: 10px;
+	width: 100%;
+	color: rgb(255, 255, 255);
+	font-size: 20px;
+	background: none;
+	outline: none;
+	border: 1px solid rgb(255, 255, 255);
+	box-sizing: border-box;
+    border-radius: 10px;
+}
+
+
+.departure_city:hover, .arrival_city:hover, .flight_number:hover, 
+.departure_date:hover, .arrival_date:hover, .departure_time:hover, 
+.arrival_time:hover, .departure_airport:hover, .arrival_airport:hover, .flight_price:hover{
+    border: 1px solid #0fc3f5;
+}
+
+.submit {
+	display: block;
+    margin-left: auto;
+    margin-right: auto;
+	padding: 10px;
+	width: 300px;
+	color: #fff;
+	font-size: 16px;
+	background: none;
+	outline: none;
+	border: 1px solid #fff;
+	box-sizing: border-box;
+    border-radius: 10px;
+	color: #fff;
+	font-weight: bold;
+	
+	border: none;
+	background: #3eb9d8;
+
+    border-radius: 30px;
+}
+
+.submit:hover {
+	background: #43a9d1;
+    color: rgb(224, 224, 224);
+}
+.submit2 {
+
+	width: 250px;
+    height: 50px;
+	color: #fff;
+	font-size: 16px;
+	
+	color: #fff;
+	font-weight: bold;
+	
+	border: none;
+	
+	font-size: 20px;
+    border-radius: 30px;
+}
+
+.submit2:hover {
+    color: rgb(134, 179, 230);
+}

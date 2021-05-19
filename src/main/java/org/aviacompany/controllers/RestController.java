@@ -38,6 +38,12 @@ public class RestController {
         return flightDao.getAll();
     }
 
+    @RequestMapping(value = "/view_flights", produces = "application/json", method = RequestMethod.GET)
+    public List<Flight> getFlights() {
+        return flightDao.getAll();
+    }
+
+
     @RequestMapping(value = "/tickets", produces = "application/json", method = RequestMethod.GET)
     public List<Ticket> getTicket() {
         return ticketDao.getAll();
@@ -47,6 +53,8 @@ public class RestController {
     public List<City> getCity() {
         return cityDao.getAll();
     }
+
+
 
 
 }
