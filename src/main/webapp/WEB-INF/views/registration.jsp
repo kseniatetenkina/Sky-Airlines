@@ -1,3 +1,4 @@
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%--
   Created by IntelliJ IDEA.
   User: Ксения
@@ -16,7 +17,9 @@
 <body>
 <form action="/reg" , method="post", modelAttribute="user"/>
 
+
 <div class="form">
+
     <h1 class="title">Регистрация нового аккаунта</h1>
     <div class="input-email">
         <input class="email" name="email" type="email" placeholder="Введите email">
@@ -30,7 +33,12 @@
     <div class="input-submit">
         <input type="submit" class="submit" value="Зарегистрироваться">
     </div>
+    <c:if test="${not empty message}">
+        <p style="font-size: 20px; color: red;" id="panel" align="center"> <c:out value="${message}"/></p>
+    </c:if>
 </div>
+
+
 
 </body>
 </html>

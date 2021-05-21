@@ -65,19 +65,31 @@ public class MainController {
 
 
     @RequestMapping(value = "/reg", method = RequestMethod.POST)
-    public String reg(@ModelAttribute("user") User user, BindingResult result, ModelMap model) {
-        if (result.hasErrors()) {
-            return "Error";
-        }
+    public ModelAndView reg(@ModelAttribute("user") User user, BindingResult result, ModelMap model) {
+//        if (result.hasErrors()) {
+//            return "Error";
+//        }
         user.setLogin(user.getEmail());
         user.setRole(Role.ROLE_USER);
         model.addAttribute("password", user.getPassword());
         System.out.println(user.getPassword());
         System.out.println(user.getEmail());
         model.addAttribute("email", user.getEmail());
-        userDaoImpl.add(user);
-        return "login";
-
+        User user1 = new User();
+        user1 = userDaoImpl.getUserByEmail(user.getEmail());
+        String message = "";
+        if(user1 == null){
+            userDaoImpl.add(user);
+            ModelAndView map = new ModelAndView("login");
+            return map;
+        }else {
+            message = "Email уже занят";
+            ModelMap modelMap = new ModelMap();
+            modelMap.addAttribute("message", message);
+            System.out.println(message);
+            ModelAndView map = new ModelAndView("registration",modelMap);
+            return map;
+        }
     }
 
 

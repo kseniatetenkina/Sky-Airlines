@@ -7,6 +7,7 @@
 --%>
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
+<%@ taglib prefix="fn" uri="http://java.sun.com/jsp/jstl/functions" %>
 
 
 <!DOCTYPE html>
@@ -52,7 +53,7 @@
             <th><h3>${flight.arrival_city}</h3></th>
             <th><h3>${flight.arrival_airport}</h3></th>
             <th><h3>${flight.flight_number}</h3></th>
-            <th><h3>${flight.departure_date}</h3></th>
+            <th><h3>${fn:substring(flight.departure_date,0,10)}</h3></th>
             <th><h3>${flight.departure_time}</h3></th>
             <th><h3>${flight.arrival_time}</h3></th>
             <th><h3>${flight.flight_price}</h3></th>

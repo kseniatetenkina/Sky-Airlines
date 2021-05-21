@@ -6,6 +6,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
 import java.text.SimpleDateFormat;
+import java.util.Comparator;
 import java.util.Date;
 import java.util.List;
 
@@ -83,9 +84,33 @@ public class FlightDaoImpl {
     }
 
 
+
+
     public List<Flight> getAllFlights() {
         List<Flight> flights = getSession().createQuery("From Flight ", Flight.class).list();
         System.out.println("количество рейсов "+flights.size());
+        flights.sort(new Comparator<Flight>() {
+            @Override
+            public int compare(Flight o1, Flight o2) {
+                if (o1.getDeparture_date().getTime() == o2.getDeparture_date().getTime()){
+                    if(o1.getDeparture_time().getHour() == o2.getDeparture_time().getHour()){
+                        if(o1.getDeparture_time().getMinute() == o2.getDeparture_time().getMinute()){
+                            return 0;
+                        }
+                        else if(o1.getDeparture_time().getMinute() > o2.getDeparture_time().getMinute()){
+                            return 1;
+                        }
+                        else return -1;
+                    }
+                    else if(o1.getDeparture_time().getHour() > o2.getDeparture_time().getHour()){
+                        return 1;
+                    }
+                    else return -1;
+                }
+                else if (o1.getDeparture_date().getTime() > o2.getDeparture_date().getTime()) return -1;
+                else return 1;
+            }
+        });
         return flights;
     }
 }
